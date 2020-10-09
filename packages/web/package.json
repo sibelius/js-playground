@@ -4,6 +4,11 @@
   "dependencies": {
     "@babel/polyfill": "7.8.3",
     "@babel/standalone": "^7.11.6",
+    "@babel/parser": "^7.11.5",
+    "@babel/traverse": "^7.11.5",
+    "@babel/core": "^7.11.6",
+    "resolve": "^1.17.0",
+    "detective": "^5.2.0",
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "@material-ui/styles": "4.10.0",

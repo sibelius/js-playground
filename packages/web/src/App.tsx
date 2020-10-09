@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from 'rebass';
 import media from 'styled-media-query';
 import styled from 'styled-components';
@@ -6,11 +6,11 @@ import styled from 'styled-components';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilCallback, useRecoilState } from 'recoil';
 
 import RunnableBlockCode from './RunnableBlockCode';
 import { initialCode } from './initialCode';
-import { blocksAtom } from './blockAtomFamily';
+import { blockAtomFamily, blocksAtom } from './blockAtomFamily';
 import { getRandomFilename } from './getRandomFilename';
 
 const Content = styled.div`
@@ -25,16 +25,35 @@ const Content = styled.div`
 const App = () => {
   const [blocks, setBlocks] = useRecoilState(blocksAtom);
 
+  const logState = useRecoilCallback(({ snapshot, set, gotoSnapshot, reset }) => () => {
+    const blocks =  snapshot.getLoadable(blocksAtom).contents;
+
+    const blockValues = blocks.map(b => {
+      const v = snapshot.getLoadable(blockAtomFamily(b.id));
+
+      return v.contents;
+    });
+
+    console.log('logState', {
+      blocks,
+      blockValues,
+    });
+  });
+
   const newBlock = () => {
+    const id = getRandomFilename();
+
     setBlocks((prev) => {
       return [
         ...prev,
         {
-          id: getRandomFilename(),
+          id,
           code: initialCode,
         },
       ];
     });
+
+    logState({ id });
   };
 
   return (
