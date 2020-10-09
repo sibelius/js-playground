@@ -6,6 +6,7 @@ import {
   StylesProvider,
   ThemeProvider as MuiThemeProvider,
 } from '@material-ui/styles';
+import { RecoilRoot } from 'recoil';
 
 import App from './App';
 
@@ -41,7 +42,9 @@ const Root = () => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <GlobalStyle />
-          <App />
+          <RecoilRoot>
+            <App />
+          </RecoilRoot>
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>

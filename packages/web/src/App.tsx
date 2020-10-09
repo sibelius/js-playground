@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text } from 'rebass';
 import media from 'styled-media-query';
 import styled from 'styled-components';
@@ -6,8 +6,12 @@ import styled from 'styled-components';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
 
+import { useRecoilState } from 'recoil';
+
 import RunnableBlockCode from './RunnableBlockCode';
 import { initialCode } from './initialCode';
+import { blocksAtom } from './blockAtomFamily';
+import { getRandomFilename } from './getRandomFilename';
 
 const Content = styled.div`
   margin: 0 auto;
@@ -19,21 +23,18 @@ const Content = styled.div`
 `;
 
 const App = () => {
-  const [blocks, setBlocks] = useState([
-    {
-      code: initialCode,
-    },
-  ]);
+  const [blocks, setBlocks] = useRecoilState(blocksAtom);
 
   const newBlock = () => {
-    const newBlocks = [
-      ...blocks,
-      {
-        code: initialCode,
-      },
-    ];
-
-    setBlocks(newBlocks);
+    setBlocks((prev) => {
+      return [
+        ...prev,
+        {
+          id: getRandomFilename(),
+          code: initialCode,
+        },
+      ];
+    });
   };
 
   return (
@@ -42,7 +43,7 @@ const App = () => {
         JavaScript Playground
       </Text>
       {blocks.map((block, i) => (
-        <RunnableBlockCode key={i} />
+        <RunnableBlockCode key={i} id={block.id} />
       ))}
       <Button onClick={newBlock} mt='5px' mb='5px'>
         <AddIcon />

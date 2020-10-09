@@ -3027,6 +3027,13 @@
     "@types/styled-system" "*"
     "@types/styled-system__css" "*"
 
+"@types/recoil@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@types/recoil/-/recoil-0.0.1.tgz#c69efee4871e0e3fc4fe19ba15a6bfc35f9b6bf1"
+  integrity sha512-pRrS1aizm7GqM9NciOSPGoQ7K56rhyMcha6/Zewkwnb/H1dmz7VbDs+RIE/QZOx9CBHqdFBAU4x6LYt+qJZV8A==
+  dependencies:
+    "@types/react" "*"
+
 "@types/serve-static@*":
   version "1.13.4"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.4.tgz#6662a93583e5a6cabca1b23592eb91e12fa80e7c"
@@ -11794,10 +11801,10 @@ pretty-format@^26.4.2:
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
 
-prismjs@1.20.0:
-  version "1.20.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.20.0.tgz#9b685fc480a3514ee7198eac6a3bf5024319ff03"
-  integrity sha512-AEDjSrVNkynnw6A+B1DsFkd6AVdTnp+/WoUixFRULlCLZVRZlVQMVWio/16jv7G1FscUxQxOQhWwApgbnxr6kQ==
+prismjs@1.21.0:
+  version "1.21.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.21.0.tgz#36c086ec36b45319ec4218ee164c110f9fc015a3"
+  integrity sha512-uGdSIu1nk3kej2iZsLyDoJ7e9bnPzIgY0naW/HdknGj61zScaprVEVGHrPoXqI+M9sP0NDnTK2jpkvmldpuqDw==
   optionalDependencies:
     clipboard "^2.0.0"
 
@@ -12383,6 +12390,11 @@ rebass@4.0.7:
   integrity sha512-GJot6j6Qcr7jk1QIgf9qBoud75CGRpN8pGcEo98TSp4KNSWV01ZLvGwFKGI35oEBuNs+lpEd3+pnwkQUTSFytg==
   dependencies:
     reflexbox "^4.0.6"
+
+recoil@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.0.13.tgz#23e6d63135c07d8defbd91aaa35dca94ec5c15a6"
+  integrity sha512-2OToaQ8GR//KsdKdaEhMi04QKStLGRpk3qjC58iBpZpUtsByZ4dUy2UJtRcYuhnVlltGZ8HNwcEQRdFOS864SQ==
 
 recursive-readdir@2.2.2:
   version "2.2.2"

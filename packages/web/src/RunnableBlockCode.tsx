@@ -7,9 +7,12 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { useDebouncedCallback } from 'use-debounce';
 
+import { useRecoilState } from 'recoil';
+
 import { BlockMonacoCodeEditor } from './BlockMonacoCodeEditor';
-import { initialCode } from './initialCode';
 import { createLiveEditor } from './createLiveEditor';
+import { blockAtomFamily } from './blockAtomFamily';
+import Debug from './Debug';
 
 const RunButton = styled(Button)`
   color: green;
@@ -46,9 +49,21 @@ const PreviewError = () => {
   return <RedSpan>React Preview Error</RedSpan>;
 };
 
-const RunnableBlockCode = () => {
-  const [code, setCode] = useState<string>(initialCode);
+type Props = {
+  id: string;
+};
+const RunnableBlockCode = ({ id }: Props) => {
+  const [block, setBlock] = useRecoilState(blockAtomFamily(id));
   const [codeResult, setCodeResult] = useState(null);
+
+  const code = block.code;
+
+  const setCode = (newCode) => {
+    setBlock({
+      ...block,
+      code: newCode,
+    });
+  };
 
   const previewRef = useRef();
   const editorRef = useRef();
@@ -64,7 +79,7 @@ const RunnableBlockCode = () => {
         fn,
         fnS: fn.toString(),
         result,
-      })
+      });
     } catch (err) {
       // eslint-disable-next-line
       console.log('new Function err: ', err);
@@ -83,11 +98,11 @@ const RunnableBlockCode = () => {
     editorRef.current = createLiveEditor(previewRef.current);
   }, []);
 
-  const [run] = useDebouncedCallback(code => {
+  const [run] = useDebouncedCallback((code) => {
     editorRef.current.run(code);
   });
 
-  const onCodeChange = newCode => {
+  const onCodeChange = (newCode) => {
     setCode(newCode);
 
     run(newCode);
@@ -106,6 +121,7 @@ const RunnableBlockCode = () => {
           <span>{codeResult}</span>
         </Result>
       )}
+      <Debug code={code} />
       <ErrorBoundary FallbackComponent={PreviewError}>
         <span>Preview</span>
         <Preview ref={previewRef} />
